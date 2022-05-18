@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 
 //importing routes 
@@ -20,11 +21,17 @@ dotenv.config();
 
 //declare app which allows us to use the web app functionalities.
 const app = express();
+//allows use of cross origin resource sharing
+app.use(cors({
+    credentials:true,
+    origin:true
+}));
 
 //allows us to send json information to the server (this is configuration)
 app.use(express.json());
 //allow us to read cookies sent with the request. 
 app.use(cookieParser());
+
 
 //initialize passport 
 app.use(passport.initialize());
