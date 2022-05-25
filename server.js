@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 console.log("filename is", __filename);
 const __dirname = dirname(__filename);
 console.log("directoryname is", __dirname);
-
+const PORT = process.env.PORT || 3001
 
 //importing routes 
 import teaRoutes from './routes/teaRoutes.js';
@@ -65,6 +65,6 @@ app.get("*", (req, res) => {
 });
 
 //listening for requests on port 3001
-app.listen(3001, ()=> {
+app.listen(PORT, ()=> {
     console.log("The server is listening for requests....");
 })
