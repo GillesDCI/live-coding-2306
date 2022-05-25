@@ -6,6 +6,15 @@ import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
+import {fileURLToPath} from 'url';
+import { dirname } from 'path';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+console.log("filename is", __filename);
+const __dirname = dirname(__filename);
+console.log("directoryname is", __dirname);
+
 
 //importing routes 
 import teaRoutes from './routes/teaRoutes.js';
@@ -47,6 +56,13 @@ app.use('/api/teas', teaRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/orders', orderRoutes);
+
+//statically serving the build folder
+app.use(express.static(path.join(__dirname, "client/build")));
+// * is the wildcard, anything else that's no matching a route above this.
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 
 //listening for requests on port 3001
 app.listen(3001, ()=> {
