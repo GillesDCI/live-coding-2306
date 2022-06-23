@@ -13,14 +13,15 @@ import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import Logout from './pages/Logout';
 
+import { AuthProvider } from './contexts/AuthContext';
+import Header from './components/Partials/Header';
+
 
 function App() {
   return (
+    <AuthProvider>
   <BrowserRouter>
-
-    
-     
-    <Navbar />
+    <Header />
 
     <Routes>
       <Route path="/" element={<Home />} />
@@ -30,7 +31,7 @@ function App() {
 
     </Routes>
   </BrowserRouter>
-  
+  </AuthProvider>
   );
 }
 

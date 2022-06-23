@@ -39,13 +39,18 @@ export const login = async(req, res) => {
             const token = await authenticationHelper.generateToken(user);
             //return res.status(200).json({message:'You are authenticated!', token:token});
 
+            const userToReturn = {
+                username:user.username
+            }
+
             return res.status(200).cookie("jwt",token,{
                 httpOnly:true,
                 secure:false,
                 sameSite:"lax"
             })
             .json({
-                message:'Login succesful'
+                message:'Login succesful',
+                user:userToReturn
             });
 
 

@@ -10,7 +10,7 @@ const generateToken = (user) => {
     return new Promise((resolve, reject) => {
         jwt.sign(payload, 
             process.env.JWT_SECRET,
-            {expiresIn:"1h"},
+            {expiresIn:"20s"},
             (err, token) => {
             if(err){
                 reject(err);

@@ -1,7 +1,14 @@
 import axios from './../util/axiosInstance';
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { AuthContext } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Login() {
+
+  const {handleLogin, loggedIn} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
      e.preventDefault();
@@ -17,6 +24,8 @@ export default function Login() {
         const response = await axios.post('/api/users/login', data);
         console.log("response ", response);
 
+        handleLogin(true, response.data.user.username);
+        navigate("/");
          
      } catch (error) {
          
@@ -27,6 +36,7 @@ export default function Login() {
   return (
     <>
       <h1>Login</h1>
+      <p>The value is: {loggedIn.toString()}</p>
       <form onSubmit={handleSubmit}>
         <label>
           Email
